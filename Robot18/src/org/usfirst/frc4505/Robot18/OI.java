@@ -174,7 +174,7 @@ public class OI {
         /** IMPLICITLY USED BUTTONS:
          * LB: flip drive direction 
          * RB: flip intake direction
-         * 
+         * RS: drive straight
          */
         if (controllerTwo != null && RobotMap.prefs.getBoolean("twoControllers", true)) {
 	        //add controller 2 controls
