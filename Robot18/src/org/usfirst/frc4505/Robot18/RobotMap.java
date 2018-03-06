@@ -166,8 +166,8 @@ public class RobotMap {
 
         prefs = Preferences.getInstance();
         
-        elUpSpd = prefs.getDouble("elUpSpd", 0.5);
-        elDownSpd = prefs.getDouble("elDownSpd", -0.3);
+        elUpSpd = prefs.getDouble("elUpSpd", 1.0);
+        elDownSpd = prefs.getDouble("elDownSpd", -1.0);
         
         intakeSpd = prefs.getDouble("intakeSpd", 0.5);
         
