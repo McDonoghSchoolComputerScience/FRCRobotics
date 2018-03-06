@@ -44,9 +44,11 @@ public class SpinIntakeWheels extends Command {
     @Override
     protected void execute() {
     	if (Robot.oi.RT.get()) {
-    		Robot.intakeWheels.set(Robot.oi.getAxis(Robot.oi.rt), Robot.oi.LB.get());
+    		Robot.intakeWheels.set(Robot.oi.getAxis(Robot.oi.rt), Robot.oi.RB.get());
+    	} else if (Robot.oi.RT2.get()) {
+    		Robot.intakeWheels.set(Robot.oi.getAxis2(Robot.oi.rt), Robot.oi.RB2.get());
     	} else {
-    		Robot.ramps.set(Robot.oi.getAxis2(Robot.oi.rt), Robot.oi.LB2.get());
+    		Robot.intakeWheels.set(Robot.oi.getAxis2(Robot.oi.rsy), Robot.oi.RB2.get());
     	}
     }
 

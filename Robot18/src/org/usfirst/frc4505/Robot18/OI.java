@@ -179,15 +179,18 @@ public class OI {
         
         
         RT.whileHeld(new SpinIntakeWheels());
+        
         RS.whileHeld(new DriveStraight());
+        
         D.whileHeld(new ElevatorDown());
         U.whileHeld(new ElevatorUp());
-//        L.whenPressed(new LowerIntakeArms());
-//        R.whenPressed(new RaiseIntakeArms());
+        
         START.whileHeld(new ResetSensors());
+        
         LT.whileHeld(new SpinRampsUp());
         
-//        X.whenPressed(new TogglePincher());
+        BACK.whileHeld(new DeployRamps());
+        
         
         /** IMPLICITLY USED BUTTONS:
          * LB: flip drive direction 
@@ -204,17 +207,17 @@ public class OI {
 		        
 		        D2.whileHeld(new ElevatorDown());
 		        U2.whileHeld(new ElevatorUp());
-	//	        L2.whenPressed(new LowerIntakeArms());
-	//	        R2.whenPressed(new RaiseIntakeArms());
+		        
 		        LT2.whileHeld(new SpinRampsUp());
 		        
-	//	        X2.whenPressed(new TogglePincher());
 		        A2.whenPressed(new ElevatorDownToNextLimit());
 		        Y2.whenPressed(new ElevatorUpToNextLimit());
 		        
 		        LSX2.whileHeld(new SpinRampsUp());
 		        
-		        //start for deploying ramps
+		        //back for deploying ramps
+        		BACK2.whileHeld(new DeployRamps());
+
         	} else {
         		//logitech joystick controller two
         		RU.whileHeld(new ElevatorUp());
@@ -229,7 +232,8 @@ public class OI {
         		R2.whileHeld(new SpinRampsUp());
         		L2.whileHeld(new SpinRampsUp());
         		
-        		//slider for dropping ramps
+        		//trigger for dropping ramps
+        		trigger.whileHeld(new DeployRamps());
         	}
 	        
         }

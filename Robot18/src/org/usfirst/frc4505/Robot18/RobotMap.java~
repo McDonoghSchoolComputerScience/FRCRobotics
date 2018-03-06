@@ -106,7 +106,7 @@ public class RobotMap {
         intakeWheelsrightIn.setInverted(false);
         elevatorelevator1 = new Spark(2);
         LiveWindow.addActuator("Elevator", "elevator1", (Spark) elevatorelevator1);
-        elevatorelevator1.setInverted(false);
+        elevatorelevator1.setInverted(true);
         elevatorlimitLow = new DigitalInput(0);
         LiveWindow.addSensor("Elevator", "limitLow", elevatorlimitLow);
         
@@ -166,8 +166,8 @@ public class RobotMap {
 
         prefs = Preferences.getInstance();
         
-        elUpSpd = prefs.getDouble("elUpSpd", 0.5);
-        elDownSpd = prefs.getDouble("elDownSpd", -0.3);
+        elUpSpd = prefs.getDouble("elUpSpd", 1.0);
+        elDownSpd = prefs.getDouble("elDownSpd", -1.0);
         
         intakeSpd = prefs.getDouble("intakeSpd", 0.5);
         

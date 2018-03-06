@@ -79,7 +79,7 @@ public class SameSideAuto extends Command {
     			}
     		} else if (state == 2) {//lift elevator
     			Robot.elevator.set(0.5);//check pow & dir
-    			if (Robot.elevator.isElevatorMiddle() || (Timer.getFPGATimestamp()-tState) > 4.0) {
+    			if (Robot.elevator.isElevatorMiddle() || (Timer.getFPGATimestamp()-tState) > 3.0) {
     				Robot.elevator.stop();
     				tState = Timer.getFPGATimestamp();
     				state++;
