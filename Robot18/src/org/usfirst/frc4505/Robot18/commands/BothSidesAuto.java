@@ -121,7 +121,7 @@ public class BothSidesAuto extends Command {
     				state++;
     			}
     		} else if (state == 7) {//spit out cube
-    			Robot.intakeWheels.set(-0.8);//check direction
+    			Robot.intakeWheels.set(-1.0);//check direction
     			if ((Timer.getFPGATimestamp()-tState) > 2.0) {//if finished
     				Robot.intakeWheels.stop();
     				state = -1;

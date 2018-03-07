@@ -103,6 +103,14 @@ public class Ramps extends Subsystem {
     	set(0);
     }
     
+    public Servo getSetvo() {
+    	return rampServo;
+    }
+    
+    public double getServoAngle() {
+    	return rampServo.get();
+    }
+    
     public void setServo(double ang) {
     	rampServo.set(ang);
     }
