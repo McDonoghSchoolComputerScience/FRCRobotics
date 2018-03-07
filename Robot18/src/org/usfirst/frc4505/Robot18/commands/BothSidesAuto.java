@@ -65,7 +65,8 @@ public class BothSidesAuto extends Command {
     		} else if (state == 1) {//get reading from i2c
     			boolean b = Robot.drivetrain.readFromI2C(1);
     			if ((Timer.getFPGATimestamp()-tState) > 1.0) {
-    				state = -1;
+    				state = 8;
+    				//change to drive up to line
     			} else if (!b) {
     				Robot.drivetrain.stop();
     				tState = Timer.getFPGATimestamp();
@@ -123,6 +124,11 @@ public class BothSidesAuto extends Command {
     			Robot.intakeWheels.set(-0.8);//check direction
     			if ((Timer.getFPGATimestamp()-tState) > 2.0) {//if finished
     				Robot.intakeWheels.stop();
+    				state = -1;
+    			}
+    		} else if (state == 8) {//pixy not working, drive up to line
+    			Robot.drivetrain.driveStraight(-RobotMap.autoSpd, angle, Robot.drivetrain.getAngle(), 0.5);
+    			if (Robot.drivetrain.goneInches(120.0)) {
     				state = -1;
     			}
     		}

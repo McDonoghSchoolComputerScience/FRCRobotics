@@ -13,6 +13,7 @@ package org.usfirst.frc4505.Robot18.commands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc4505.Robot18.Robot;
+import org.usfirst.frc4505.Robot18.RobotMap;
 
 /**
  *
@@ -44,24 +45,45 @@ public class AutoRight extends Command {
     	tStart = Timer.getFPGATimestamp();
     	Robot.drivetrain.resetSensors();
     	angle = Robot.drivetrain.getAngle();
+    	boolean correctColor;
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
     	//default, drive 120 inches
-    	while((Timer.getFPGATimestamp()-tStart) <= 15.0 && state != -1) {
-    		if (state == 0) {
-    			Robot.drivetrain.driveStraight(0.5, angle, Robot.drivetrain.getAngle(), 0.5);//check direction
-    			if (Robot.drivetrain.getInches(1) >= 120.0) {//if finished
+    	if(Timer.getFPGATimestamp()<=15.0 && state!=-1) {
+    		if(state==0) {
+    			Robot.drivetrain.driveStraight(0.5, angle, Robot.drivetrain.getAngle(), 0.5);
+    			if(Robot.drivetrain.goneInches(80-RobotMap.robotLen)) {
+    				state=1;
+    			}
+    		}else if(state==1) {
+    			boolean b = Robot.drivetrain.readFromI2C(1);
+    			if (!b) {
     				Robot.drivetrain.stop();
     				state++;
+    				if ((RobotMap.readIn[0] == 1 && RobotMap.isBlue) || 
+    						(RobotMap.readIn[0] == 2 && !RobotMap.isBlue)) {//check that 1 is blue, 2 is red
+    					//corrrectColor = true;
+    					state=2;
+    		}			
+    					//reads same color, put it in box in front of you
+    						
+    				} else {
+//    					correctColor = false;
+    					//reads not same color, drive up to line and stop
+    				}
     			}
-    		} else if (state == 1) {
-    			state = -1;
-    		}
+    			//do something here
+    			if ("a".equals("a")) {
+    				state = 2;
+    			}
+    		
     	}
     }
+    
+    
 
     // Make this return true when this Command no longer needs to run execute()
     @Override

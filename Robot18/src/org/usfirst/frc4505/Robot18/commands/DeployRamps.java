@@ -13,6 +13,7 @@ package org.usfirst.frc4505.Robot18.commands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc4505.Robot18.Robot;
+import org.usfirst.frc4505.Robot18.RobotMap;
 
 /**
  *
@@ -46,7 +47,7 @@ public class DeployRamps extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    	if ((Timer.getFPGATimestamp()-tStart) > 0.5) {
+    	if (RobotMap.safeguard == (Timer.getFPGATimestamp()-tStart) > 0.5) {
     		Robot.ramps.setServo(1.0);
     	}
     }
