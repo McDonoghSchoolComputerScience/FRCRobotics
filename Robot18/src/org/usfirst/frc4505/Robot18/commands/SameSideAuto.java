@@ -77,18 +77,18 @@ public class SameSideAuto extends Command {
     					state = 5;
     				}
     			}
-    		} else if (state == 2) {//lift elevator
-    			Robot.elevator.set(0.5);//check pow & dir
-    			if (Robot.elevator.isElevatorMiddle() || (Timer.getFPGATimestamp()-tState) > 3.0) {
-    				Robot.elevator.stop();
-    				tState = Timer.getFPGATimestamp();
-    				state++;
-    			}
-    		} else if (state == 3) {//drive up to switch
+    		} else if (state == 2) {//drive up to switch
     			Robot.drivetrain.driveStraight(-RobotMap.autoSpd, angle, Robot.drivetrain.getAngle(), 0.5);//check direction
     			if (Robot.drivetrain.goneInches(140.0-RobotMap.robotLen) || (Timer.getFPGATimestamp()-tStart) > 14.0) {//if finished
     				tState = Timer.getFPGATimestamp();
     				Robot.drivetrain.stop();
+    				state++;
+    			}
+    		} else if (state == 3) {//lift elevator
+    			Robot.elevator.set(0.5);//check pow & dir
+    			if (Robot.elevator.isElevatorMiddle() || (Timer.getFPGATimestamp()-tState) > 3.0) {
+    				Robot.elevator.stop();
+    				tState = Timer.getFPGATimestamp();
     				state++;
     			}
     		}  else if (state == 4) {//spit cube out

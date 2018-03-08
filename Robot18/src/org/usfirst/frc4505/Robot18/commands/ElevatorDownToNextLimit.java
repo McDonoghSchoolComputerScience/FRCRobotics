@@ -56,6 +56,9 @@ public class ElevatorDownToNextLimit extends Command {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
+    	if (Robot.elevator.isElevatorDown()) {
+    		return true;
+    	}
         if (Robot.elevator.state==2) {
         	return Robot.elevator.isElevatorDown();
         } else {

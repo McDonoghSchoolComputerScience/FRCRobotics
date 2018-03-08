@@ -38,10 +38,10 @@ public class SetRampServo extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-    	if ("a".equals("a")) {//CHANGE THIS TO SOMETHING REAL
+    	if ("a".equals("aa")) {//CHANGE THIS TO SOMETHING REAL
     		Robot.ramps.setServo(Math.min(Robot.ramps.getServoAngle()+0.1, 1.0));
     	} else {
-    		Robot.ramps.setServo(Math.max(Robot.ramps.getServoAngle()+0.1, 0.0));
+    		Robot.ramps.setServo(Math.max(Robot.ramps.getServoAngle()-0.1, 0.0));
     	}
     }
 

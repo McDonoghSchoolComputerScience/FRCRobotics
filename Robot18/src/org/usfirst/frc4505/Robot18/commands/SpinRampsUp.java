@@ -45,34 +45,35 @@ public class SpinRampsUp extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    	if (!RobotMap.safeguard || (Timer.getFPGATimestamp()-RobotMap.tStart) >= 105.0) {
-	    	if (Robot.oi.LT.get()) {
-	    		Robot.ramps.set(1.0, Robot.oi.LB.get());
-	    	} else {
-	    		if (RobotMap.prefs.getBoolean("bothXbox", false)) {
-	    			//xbox
-	    			if (Robot.oi.LT2.get()) {
-	    	    		Robot.ramps.set(1.0, Robot.oi.LB2.get());
-	    	    	} else if (Robot.oi.LSX2.get()) {
-	    	    		if (Robot.oi.getAxis2(Robot.oi.lsx) > 0) {
-	    	    			//right
-	    	    			Robot.ramps.setRight(1.0, Robot.oi.LB2.get());
-	    	    		} else {
-	    	    			//left
-	    	    			Robot.ramps.setLeft(1.0, Robot.oi.LB2.get());
-	    	    		}
-	    	    	}
+    	if (Robot.oi.LT.get()) {
+    		Robot.ramps.set(1.0, Robot.oi.LB.get());
+    	} else {
+    		if (RobotMap.prefs.getBoolean("bothXbox", false)) {
+    			//xbox
+    			if (Robot.oi.LT2.get()) {
+    	    		Robot.ramps.set(1.0, Robot.oi.LB2.get());
+    	    	} else if (Robot.oi.LSX2.get()) {
+    	    		if (Robot.oi.getAxis2(Robot.oi.lsx) > 0) {
+    	    			//right
+    	    			Robot.ramps.setRight(1.0, Robot.oi.LB2.get());
+    	    		} else {
+    	    			//left
+    	    			Robot.ramps.setLeft(1.0, Robot.oi.LB2.get());
+    	    		}
+    	    	}
+    		} else {
+    			//joystick
+    			if (Robot.oi.B7.get()) {
+    				//both ramps
+    				Robot.ramps.set(1.0, Robot.oi.B6.get());
+    			} else if (Robot.oi.R2.get()) {
+    				//right
+	    			Robot.ramps.setRight(1.0, Robot.oi.B6.get());
 	    		} else {
-	    			//joystick
-	    			if (Robot.oi.R2.get()) {
-	    				//right
-		    			Robot.ramps.setRight(1.0, Robot.oi.B6.get());
-		    		} else {
-		    			//left
-		    			Robot.ramps.setLeft(1.0, Robot.oi.B6.get());
-		    		}
+	    			//left
+	    			Robot.ramps.setLeft(1.0, Robot.oi.B6.get());
 	    		}
-	    	}
+    		}
     	
     	}
     }

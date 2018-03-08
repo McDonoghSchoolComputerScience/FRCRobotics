@@ -57,12 +57,12 @@ public class IntakeWheels extends Subsystem {
     // here. Call these from Commands.
     
     public void set(double pow) {
-    	leftIn.set(-pow);
-    	rightIn.set(pow*RobotMap.prefs.getDouble("differential", 1.0));
+    	leftIn.set(pow*RobotMap.prefs.getDouble("differential", 1.0));
+    	rightIn.set(-pow);
     }
     
     public void set(double pow, boolean flip) {
-    	set((flip) ? pow : -pow);
+    	set((flip) ? -pow : pow);
     }
     
     public void stop() {
