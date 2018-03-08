@@ -115,7 +115,7 @@ public class BothSidesAuto extends Command {
     			}
     		} else if (state == 6) {//drive 60 (CHECK AND SUBTRACT LATER) inches up to switch
     			Robot.drivetrain.driveStraight(-RobotMap.autoSpd, angle, Robot.drivetrain.getAngle(), 0.5);//check dir
-    			if (Robot.drivetrain.goneInches(60.0) || (Timer.getFPGATimestamp()-tState) > 5.0) {
+    			if (Robot.drivetrain.goneInches(60.0-RobotMap.robotLen) || (Timer.getFPGATimestamp()-tState) > 5.0) {
     				Robot.drivetrain.stop();
     				tState = Timer.getFPGATimestamp();
     				state++;

@@ -47,7 +47,7 @@ public class DeployRamps extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    	if (RobotMap.safeguard == (Timer.getFPGATimestamp()-tStart) > 0.5) {
+    	if (!RobotMap.safeguard || (Timer.getFPGATimestamp()-tStart) > 0.5) {
     		Robot.ramps.setServo(1.0);
     	}
     }

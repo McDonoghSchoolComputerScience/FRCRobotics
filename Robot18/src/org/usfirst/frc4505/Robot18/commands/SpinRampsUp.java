@@ -10,6 +10,7 @@
 
 
 package org.usfirst.frc4505.Robot18.commands;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc4505.Robot18.Robot;
 import org.usfirst.frc4505.Robot18.RobotMap;
@@ -44,35 +45,36 @@ public class SpinRampsUp extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    	if (Robot.oi.LT.get()) {
-    		Robot.ramps.set(Robot.oi.getAxis(Robot.oi.lt), Robot.oi.LB.get());
-    	} else {
-    		if (RobotMap.prefs.getBoolean("bothXbox", false)) {
-    			//xbox
-    			if (Robot.oi.LT2.get()) {
-    	    		Robot.ramps.set(Robot.oi.getAxis2(Robot.oi.lt), Robot.oi.LB2.get());
-    	    	} else if (Robot.oi.LSX2.get()) {
-    	    		if (Robot.oi.getAxis2(Robot.oi.lsx) > 0) {
-    	    			//right
-    	    			Robot.ramps.setRight(1.0, Robot.oi.LB2.get());
-    	    		} else {
-    	    			//left
-    	    			Robot.ramps.setLeft(1.0, Robot.oi.LB2.get());
-    	    		}
-    	    	}
-    		} else {
-    			//joystick
-    			if (Robot.oi.R2.get()) {
-    				//right
-	    			Robot.ramps.setRight(1.0, Robot.oi.B6.get());
+    	if (!RobotMap.safeguard || (Timer.getFPGATimestamp()-RobotMap.tStart) >= 105.0) {
+	    	if (Robot.oi.LT.get()) {
+	    		Robot.ramps.set(1.0, Robot.oi.LB.get());
+	    	} else {
+	    		if (RobotMap.prefs.getBoolean("bothXbox", false)) {
+	    			//xbox
+	    			if (Robot.oi.LT2.get()) {
+	    	    		Robot.ramps.set(1.0, Robot.oi.LB2.get());
+	    	    	} else if (Robot.oi.LSX2.get()) {
+	    	    		if (Robot.oi.getAxis2(Robot.oi.lsx) > 0) {
+	    	    			//right
+	    	    			Robot.ramps.setRight(1.0, Robot.oi.LB2.get());
+	    	    		} else {
+	    	    			//left
+	    	    			Robot.ramps.setLeft(1.0, Robot.oi.LB2.get());
+	    	    		}
+	    	    	}
 	    		} else {
-	    			//left
-	    			Robot.ramps.setLeft(1.0, Robot.oi.B6.get());
+	    			//joystick
+	    			if (Robot.oi.R2.get()) {
+	    				//right
+		    			Robot.ramps.setRight(1.0, Robot.oi.B6.get());
+		    		} else {
+		    			//left
+		    			Robot.ramps.setLeft(1.0, Robot.oi.B6.get());
+		    		}
 	    		}
-    		}
+	    	}
+    	
     	}
-    	
-    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
