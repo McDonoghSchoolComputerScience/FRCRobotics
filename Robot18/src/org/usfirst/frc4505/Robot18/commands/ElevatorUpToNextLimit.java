@@ -45,7 +45,7 @@ public class ElevatorUpToNextLimit extends Command {
     	} else if (Robot.elevator.isElevatorMiddle()) {
     		Robot.elevator.state = 4;
     	}
-    	Robot.elevator.set(RobotMap.elDownSpd);
+    	Robot.elevator.set(RobotMap.elUpSpd);
     }
 
     // Called repeatedly when this Command is scheduled to run

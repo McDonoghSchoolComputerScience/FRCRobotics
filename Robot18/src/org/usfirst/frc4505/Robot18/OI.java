@@ -243,7 +243,6 @@ public class OI {
         		
         		trigger.whileHeld(new DeployRamps());
         		
-        		
         	}
 	        
         }

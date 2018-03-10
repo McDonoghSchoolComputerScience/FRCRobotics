@@ -75,19 +75,19 @@ public class Ramps extends Subsystem {
     
     
     public void setLeft(double pow, boolean flip) {
-    	setLeft((flip) ? -pow : pow);
+    	setLeft((flip) ? -pow : ((RobotMap.safeguard && isLeftUp()) ? 0 : pow));
     }
     
     public void setLeft(double pow) {
-    	rampL.set((RobotMap.safeguard && isLeftUp()) ? 0 : pow);
+    	rampL.set(pow);
     }
     
     public void setRight(double pow, boolean flip) {
-    	setRight((flip) ? -pow : pow);
+    	setRight((flip) ? -pow : ((RobotMap.safeguard && isRightUp()) ? 0 : pow));
     }
     
     public void setRight(double pow) {
-    	rampR.set((RobotMap.safeguard && isRightUp()) ? 0 : pow);
+    	rampR.set(pow);
     }
     
     public void set(double pow, boolean flip) {

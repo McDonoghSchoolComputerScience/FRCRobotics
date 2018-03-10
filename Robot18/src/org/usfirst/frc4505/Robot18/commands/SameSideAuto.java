@@ -92,7 +92,7 @@ public class SameSideAuto extends Command {
     				state++;
     			}
     		}  else if (state == 4) {//spit cube out
-    			Robot.intakeWheels.set(-0.8);//check direction
+    			Robot.intakeWheels.set(-1.0);//check direction
     			if ((Timer.getFPGATimestamp()-tState) > 2.0) {//if finished
     				Robot.intakeWheels.stop();
     				state = -1;
@@ -105,6 +105,7 @@ public class SameSideAuto extends Command {
     			}
     		}
     	}
+    
     }
 
     // Make this return true when this Command no longer needs to run execute()
