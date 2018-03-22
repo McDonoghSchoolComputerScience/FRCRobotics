@@ -112,6 +112,8 @@ public class Robot extends TimedRobot {
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
         RobotMap.tStart = Timer.getFPGATimestamp();
+        RobotMap.servoStart = 0*Robot.ramps.getServoAngle();
+        Robot.ramps.setServo(0);
     }
 
     /**

@@ -49,6 +49,7 @@ public class BothSidesAuto extends Command {
     	Robot.drivetrain.sendByteToI2C(1);
     	tState = tStart;
     	correctColor = true;
+    	RobotMap.rightSide = RobotMap.prefs.getBoolean("rightSide", RobotMap.rightSide);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -71,52 +72,50 @@ public class BothSidesAuto extends Command {
     				Robot.drivetrain.stop();
     				tState = Timer.getFPGATimestamp();
     				state++;
+    				RobotMap.pixyRead = RobotMap.readIn[0];
     				if ((RobotMap.readIn[0] == 1 && RobotMap.isBlue) || 
     						(RobotMap.readIn[0] == 2 && !RobotMap.isBlue)) {//check that 1 is blue, 2 is red
     					correctColor = true;
+    					state = 5;
     				} else {
     					correctColor = false;
-    				}
-    			}
-    		} else if (state == 2) {//lift elevator
-    			Robot.elevator.set(RobotMap.elUpSpd);//check pow & dir
-    			if (Robot.elevator.isElevatorMiddle() || (Timer.getFPGATimestamp()-tState) > 3.0) {
-    				Robot.elevator.stop();
-    				tState = Timer.getFPGATimestamp();
-    				Robot.drivetrain.resetAllTalons();
-    				if (correctColor) {
-    					state = 6;
-    				} else {
     					state++;
     				}
     			}
-    		} else if (state == 3) {//turn 90 degrees ccw
-    			Robot.drivetrain.drive(0, -RobotMap.autoSpd);//check dir
-    			if ((Robot.drivetrain.getAngle()-angle) <= -90.0 || (Timer.getFPGATimestamp()-tState) > 3.0) {
+    		} else if (state == 2) {//turn 90 degrees ccw
+    			Robot.drivetrain.drive(0, (RobotMap.rightSide) ? -RobotMap.autoSpd : RobotMap.autoSpd);//check dir
+    			if ((RobotMap.rightSide && (Robot.drivetrain.getAngle()-angle) <= -90.0) || (!RobotMap.rightSide && (Robot.drivetrain.getAngle()-angle) >= 90.0) || (Timer.getFPGATimestamp()-tState) > 3.0) {
     				Robot.drivetrain.stop();
     				tState = Timer.getFPGATimestamp();
     				Robot.drivetrain.resetAllTalons();
     				state++;
     			}
-    		} else if (state == 4) {//drive 108 inches to left side
+    		} else if (state == 3) {//drive 108 inches to left side
     			Robot.drivetrain.driveStraight(-RobotMap.autoSpd, angle, Robot.drivetrain.getAngle(), 0.5);//check dir
     			if (Robot.drivetrain.goneInches(108.0) || (Timer.getFPGATimestamp()-tState) > 5.0) {
     				Robot.drivetrain.stop();
     				tState = Timer.getFPGATimestamp();
     				state++;
     			}
-    		} else if (state == 5) {//turn 90 degrees cw
-    			Robot.drivetrain.drive(0, RobotMap.autoSpd);//check dir
-    			if ((Robot.drivetrain.getAngle()-angle) >= 0 || (Timer.getFPGATimestamp()-tState) > 3.0) {
+    		} else if (state == 4) {//turn 90 degrees cw
+    			Robot.drivetrain.drive(0,  (RobotMap.rightSide) ? RobotMap.autoSpd : -RobotMap.autoSpd);//check dir
+    			if ((RobotMap.rightSide && (Robot.drivetrain.getAngle()-angle) >= 0.0) || (!RobotMap.rightSide && (Robot.drivetrain.getAngle()-angle) <= 0.0) || (Timer.getFPGATimestamp()-tState) > 3.0) {
     				Robot.drivetrain.stop();
     				tState = Timer.getFPGATimestamp();
     				Robot.drivetrain.resetAllTalons();
     				state++;
     			}
-    		} else if (state == 6) {//drive 60 (CHECK AND SUBTRACT LATER) inches up to switch
+    		} else if (state == 5) {//drive 60 (CHECK) inches up to switch
     			Robot.drivetrain.driveStraight(-RobotMap.autoSpd, angle, Robot.drivetrain.getAngle(), 0.5);//check dir
-    			if (Robot.drivetrain.goneInches(60.0) || (Timer.getFPGATimestamp()-tState) > 5.0) {
+    			if (Robot.drivetrain.goneInches(60.0-RobotMap.robotLen) || (Timer.getFPGATimestamp()-tState) > 5.0) {
     				Robot.drivetrain.stop();
+    				tState = Timer.getFPGATimestamp();
+    				state++;
+    			}
+    		} else if (state == 6) {//lift elevator
+    			Robot.elevator.set(RobotMap.elUpSpd);//check pow & dir
+    			if (Robot.elevator.isElevatorMiddle() || (Timer.getFPGATimestamp()-tState) > 3.0 || (Timer.getFPGATimestamp()-tStart) > 14.0) {
+    				Robot.elevator.stop();
     				tState = Timer.getFPGATimestamp();
     				state++;
     			}

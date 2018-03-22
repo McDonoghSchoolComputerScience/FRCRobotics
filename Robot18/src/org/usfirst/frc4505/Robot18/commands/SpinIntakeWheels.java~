@@ -12,6 +12,7 @@
 package org.usfirst.frc4505.Robot18.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc4505.Robot18.Robot;
+import org.usfirst.frc4505.Robot18.RobotMap;
 
 /**
  *
@@ -44,9 +45,9 @@ public class SpinIntakeWheels extends Command {
     @Override
     protected void execute() {
     	if (Robot.oi.RT.get()) {
-    		Robot.intakeWheels.set(Robot.oi.getAxis(Robot.oi.rt), Robot.oi.RB.get());
-    	} else if (Robot.oi.RT2.get()) {
-    		Robot.intakeWheels.set(Robot.oi.getAxis2(Robot.oi.rt), Robot.oi.RB2.get());
+    		Robot.intakeWheels.set(Robot.oi.getAxis(Robot.oi.rt)*1.2, Robot.oi.RB.get());
+    	} else if (RobotMap.prefs.getBoolean("bothXbox", false)) {
+    		Robot.intakeWheels.set(Robot.oi.getAxis2(Robot.oi.rt)*1.2, Robot.oi.RB2.get());
     	} else {
     		Robot.intakeWheels.set(Robot.oi.getAxis2(Robot.oi.rsy), Robot.oi.RB2.get());
     	}

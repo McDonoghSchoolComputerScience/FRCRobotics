@@ -71,6 +71,7 @@ public class Ramps extends Subsystem {
     public void putDataOnDash() {
     	SmartDashboard.putBoolean("leftRampUp", isLeftUp());
     	SmartDashboard.putBoolean("rightRampUp", isRightUp());
+    	SmartDashboard.putNumber("servo", getServoAngle());
     }
     
     

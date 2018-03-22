@@ -68,6 +68,7 @@ public class SameSideAuto extends Command {
     				state++;
     			} else if (!b) {
     				Robot.drivetrain.stop();
+    				RobotMap.pixyRead = RobotMap.readIn[0];
     				if ((RobotMap.readIn[0] == 1 && RobotMap.isBlue) || 
     						(RobotMap.readIn[0] == 2 && !RobotMap.isBlue)) {//check that 1 is blue, 2 is red
         				tState = Timer.getFPGATimestamp();
@@ -85,7 +86,7 @@ public class SameSideAuto extends Command {
     				state++;
     			}
     		} else if (state == 3) {//lift elevator
-    			Robot.elevator.set(0.5);//check pow & dir
+    			Robot.elevator.set(RobotMap.elUpSpd);//check pow & dir
     			if (Robot.elevator.isElevatorMiddle() || (Timer.getFPGATimestamp()-tState) > 3.0) {
     				Robot.elevator.stop();
     				tState = Timer.getFPGATimestamp();

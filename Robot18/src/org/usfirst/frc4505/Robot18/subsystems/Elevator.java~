@@ -64,9 +64,9 @@ public class Elevator extends Subsystem {
 
     
     public void putDataOnDash() {
-    	SmartDashboard.putBoolean("ElevatorDown", isElevatorDown());
+    	SmartDashboard.putBoolean("ElevatorLow", isElevatorDown());
     	SmartDashboard.putBoolean("ElevatorMid", isElevatorMiddle());
-    	SmartDashboard.putBoolean("ElevatorUp", isElevatorUp());
+    	SmartDashboard.putBoolean("ElevatorHigh", isElevatorUp());
     }
     
     public void set(double pow) {

@@ -40,6 +40,7 @@ public class SpinRampsUp extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+    	Robot.ramps.updateSafeguard();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -66,7 +67,7 @@ public class SpinRampsUp extends Command {
     			if (Robot.oi.B7.get()) {
     				//both ramps
     				Robot.ramps.set(1.0, Robot.oi.B6.get());
-    			} else if (Robot.oi.R2.get()) {
+    			} else if (Robot.oi.L2.get()) {
     				//right
 	    			Robot.ramps.setRight(1.0, Robot.oi.B6.get());
 	    		} else {

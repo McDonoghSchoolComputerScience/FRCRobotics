@@ -68,6 +68,7 @@ public class SameSideAuto extends Command {
     				state++;
     			} else if (!b) {
     				Robot.drivetrain.stop();
+    				RobotMap.pixyRead = RobotMap.readIn[0];
     				if ((RobotMap.readIn[0] == 1 && RobotMap.isBlue) || 
     						(RobotMap.readIn[0] == 2 && !RobotMap.isBlue)) {//check that 1 is blue, 2 is red
         				tState = Timer.getFPGATimestamp();
@@ -77,22 +78,22 @@ public class SameSideAuto extends Command {
     					state = 5;
     				}
     			}
-    		} else if (state == 2) {//lift elevator
-    			Robot.elevator.set(0.5);//check pow & dir
-    			if (Robot.elevator.isElevatorMiddle() || (Timer.getFPGATimestamp()-tState) > 3.0) {
-    				Robot.elevator.stop();
-    				tState = Timer.getFPGATimestamp();
-    				state++;
-    			}
-    		} else if (state == 3) {//drive up to switch
+    		} else if (state == 2) {//drive up to switch
     			Robot.drivetrain.driveStraight(-RobotMap.autoSpd, angle, Robot.drivetrain.getAngle(), 0.5);//check direction
     			if (Robot.drivetrain.goneInches(140.0-RobotMap.robotLen) || (Timer.getFPGATimestamp()-tStart) > 14.0) {//if finished
     				tState = Timer.getFPGATimestamp();
     				Robot.drivetrain.stop();
     				state++;
     			}
+    		} else if (state == 3) {//lift elevator
+    			Robot.elevator.set(RobotMap.elUpSpd);//check pow & dir
+    			if (Robot.elevator.isElevatorMiddle() || (Timer.getFPGATimestamp()-tState) > 3.0) {
+    				Robot.elevator.stop();
+    				tState = Timer.getFPGATimestamp();
+    				state++;
+    			}
     		}  else if (state == 4) {//spit cube out
-    			Robot.intakeWheels.set(-0.8);//check direction
+    			Robot.intakeWheels.set(-1.0);//check direction
     			if ((Timer.getFPGATimestamp()-tState) > 2.0) {//if finished
     				Robot.intakeWheels.stop();
     				state = -1;
@@ -105,6 +106,7 @@ public class SameSideAuto extends Command {
     			}
     		}
     	}
+    
     }
 
     // Make this return true when this Command no longer needs to run execute()

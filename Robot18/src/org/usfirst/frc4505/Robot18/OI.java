@@ -231,8 +231,8 @@ public class OI {
         		RU.whileHeld(new ElevatorUp());
         		RD.whileHeld(new ElevatorDown());
         		
-//        		D2.whenPressed(new ElevatorDownToNextLimit());
-//		        U2.whenPressed(new ElevatorUpToNextLimit());
+        		D2.whenPressed(new ElevatorDownToNextLimit());
+		        U2.whenPressed(new ElevatorUpToNextLimit());
         		
         		LU.whileHeld(new CubeOut());
         		LD.whileHeld(new CubeIn());
@@ -242,7 +242,7 @@ public class OI {
         		B7.whileHeld(new SpinRampsUp());
         		
         		trigger.whileHeld(new DeployRamps());
-        		
+//        		B6.whenPressed(new SetRampServo());
         	}
 	        
         }
